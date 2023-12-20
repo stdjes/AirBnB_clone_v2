@@ -23,3 +23,11 @@ All your classes should have documentation (python3 -c 'print(__import__("my_mod
 All your functions (inside and outside a class) should have documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
 We strongly encourage you to work together on test cases, so that you don’t miss any edge cases
 SQL Scripts
+
+## Authors :black_nib:
+
+* __Stephen Eze__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
+ &nbsp;&nbsp;[<img height="" src="https://img.shields.io/static/v1?label=&message=GitHub&color=181717&logo=GitHub&logoColor=f2f2f2&labelColor=2F333A" alt="Github">](https://github.com/stdjes)
+
+* __Michael Nketia__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
+ &nbsp;&nbsp;[<img height="" src="https://img.shields.io/static/v1?label=&message=GitHub&color=181717&logo=GitHub&logoColor=f2f2f2&labelColor=2F333A" alt="Github">](https://github.com/Addict07)
