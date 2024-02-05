@@ -1,29 +1,25 @@
 #!/usr/bin/python3
-import os
-from fabric.api import *
+# Deletes out-of-date archives
 
-env.hosts = ['54.205.163.79', '100.26.250.253']
+from fabric.api import local, run, env
+
+env.hosts = ['54.237.3.221', '54.162.78.235']
 
 
 def do_clean(number=0):
-    """Delete out-of-date archives.
-
-    Args:
-        number (int): The number of archives to keep.
-
-    If number is 0 or 1, keeps only the most recent archive. If
-    number is 2, keeps the most and second-most recent archives,
-    etc.
-    """
+    """deletes out-of-date archives"""
     number = 1 if int(number) == 0 else int(number)
 
-    archives = sorted(os.listdir("versions"))
-    [archives.pop() for i in range(number)]
-    with lcd("versions"):
-        [local("rm ./{}".format(a)) for a in archives]
+    # remove local
+    total = local("ls -l versions/*.tgz | wc -l", capture=True).stdout.strip()
+    total = int(total)
+    c = "find {} -type f -exec ls -t1 {{}} + | tail -{} | xargs rm -rf"
+    local(c.format('versions/*.tgz', total - number))
 
-    with cd("/data/web_static/releases"):
-        archives = run("ls -tr").split()
-        archives = [a for a in archives if "web_static_" in a]
-        [archives.pop() for i in range(number)]
-        [run("rm -rf ./{}".format(a)) for a in archives]
+    # remove Host
+    path = "/data/web_static/releases/"
+    total = run("find {} -type d -name 'web_static*' | wc -l"
+                .format(path)).stdout.strip()
+    total = int(total)
+    c = "ls -dt {}web_static_* | tail -{} | xargs rm -rf"
+    run(c.format(path, total - number))
